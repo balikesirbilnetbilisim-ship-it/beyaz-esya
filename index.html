@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Fixwell — Home Appliance Repair Guides</title>
-<meta name="description" content="Diagnose and fix common problems with washing machines, fridges, dishwashers, dryers and microwaves — safely, step by step, and know when to call a pro.">
+<meta name="description" content="Diagnose and fix common problems with washing machines, fridges, dishwashers, dryers and microwaves — with illustrated, step-by-step guides that show exactly where every part is.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
@@ -23,7 +23,7 @@
   --line: #ddd8cc;
   --accent: #e8590c;
   --accent-ink: #b5440a;
-  --accent-soft: #fde8db;
+  --accent-soft: #fde3d2;
   --easy: #2f7d4f;
   --easy-soft: #e1f1e7;
   --mod: #a86a00;
@@ -33,6 +33,11 @@
   --band: #16181d;
   --band-ink: #f2efe8;
   --band-muted: #a8acb5;
+  --fig-bg: #f1eee7;
+  --fig-fill: #ffffff;
+  --fig-line: #474c57;
+  --fig-shade: #e2ded4;
+  --fig-hose: #8f95a0;
   --shadow: 0 1px 2px rgba(22,24,29,.06), 0 8px 24px rgba(22,24,29,.06);
   --radius: 16px;
   --radius-sm: 10px;
@@ -44,18 +49,20 @@
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
     --bg: #111317; --surface: #1a1d23; --surface-2: #23272f; --ink: #eeebe5; --muted: #a2a7b2; --line: #2f343d;
-    --accent: #ff7a33; --accent-ink: #ff9a62; --accent-soft: #3a2418;
+    --accent: #ff7a33; --accent-ink: #ff9a62; --accent-soft: #4a2a17;
     --easy: #5cc287; --easy-soft: #183126; --mod: #f0b443; --mod-soft: #352a12; --danger: #ff7b6e; --danger-soft: #3b1d1a;
     --band: #0a0b0e; --band-ink: #eeebe5; --band-muted: #9297a1;
+    --fig-bg: #20242b; --fig-fill: #2b3038; --fig-line: #aab0bb; --fig-shade: #3a404b; --fig-hose: #737a86;
     --shadow: 0 1px 2px rgba(0,0,0,.4), 0 8px 24px rgba(0,0,0,.3);
     color-scheme: dark;
   }
 }
 :root[data-theme="dark"] {
   --bg: #111317; --surface: #1a1d23; --surface-2: #23272f; --ink: #eeebe5; --muted: #a2a7b2; --line: #2f343d;
-  --accent: #ff7a33; --accent-ink: #ff9a62; --accent-soft: #3a2418;
+  --accent: #ff7a33; --accent-ink: #ff9a62; --accent-soft: #4a2a17;
   --easy: #5cc287; --easy-soft: #183126; --mod: #f0b443; --mod-soft: #352a12; --danger: #ff7b6e; --danger-soft: #3b1d1a;
   --band: #0a0b0e; --band-ink: #eeebe5; --band-muted: #9297a1;
+  --fig-bg: #20242b; --fig-fill: #2b3038; --fig-line: #aab0bb; --fig-shade: #3a404b; --fig-hose: #737a86;
   --shadow: 0 1px 2px rgba(0,0,0,.4), 0 8px 24px rgba(0,0,0,.3);
   color-scheme: dark;
 }
@@ -97,7 +104,7 @@ svg { display: block; }
 .icon-btn { width: 40px; height: 40px; display: grid; place-items: center; border-radius: 999px; border: 1px solid var(--line); background: var(--surface); cursor: pointer; flex: none; }
 .icon-btn:hover { border-color: var(--ink); }
 .menu-btn { display: none; }
-@media (max-width: 760px) {
+@media (max-width: 860px) {
   .menu-btn { display: grid; }
   .nav { display: none; position: absolute; top: 64px; left: 0; right: 0; flex-direction: column; padding: .75rem 1rem 1rem; background: var(--bg); border-bottom: 1px solid var(--line); }
   .nav.open { display: flex; }
@@ -107,6 +114,7 @@ svg { display: block; }
 /* ============ Hero ============ */
 .hero { padding: clamp(3rem, 7vw, 6rem) 0 clamp(3.5rem, 7vw, 5.5rem); }
 .hero-grid { display: grid; gap: clamp(2.5rem, 5vw, 4rem); align-items: center; }
+.hero-grid > *, .fix-grid > *, .safety-grid > *, .faq-wrap > * { min-width: 0; }
 .hero h1 { font-size: clamp(2.6rem, 6.4vw, 4.6rem); font-weight: 800; margin: 1.1rem 0 1.25rem; }
 .hero h1 span { color: var(--accent); }
 .hero .lead { font-size: clamp(1.05rem, 1.6vw, 1.2rem); color: var(--muted); max-width: 34rem; }
@@ -117,7 +125,6 @@ svg { display: block; }
 
 .picker { background: var(--surface); border: 1px solid var(--line); border-radius: 24px; padding: clamp(1.25rem, 3vw, 1.75rem); box-shadow: var(--shadow); }
 .picker h2 { font-size: 1.35rem; font-weight: 700; margin: .5rem 0 1.25rem; }
-.hero-grid > *, .fix-grid > *, .safety-grid > *, .faq-wrap > * { min-width: 0; }
 .picker-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .65rem; }
 @media (max-width: 420px) { .picker-grid { grid-template-columns: 1fr; } }
 .picker-btn { display: flex; align-items: center; gap: .85rem; padding: .9rem; border-radius: var(--radius-sm); border: 1px solid var(--line); background: var(--bg); cursor: pointer; text-align: left; transition: border-color .15s, transform .15s; }
@@ -127,6 +134,30 @@ svg { display: block; }
 .picker-btn .ico svg { width: 28px; height: 28px; }
 .picker-btn b { display: block; font-weight: 600; }
 .picker-btn small { color: var(--muted); font-size: .82rem; }
+
+/* ============ Diagrams ============ */
+.fig { width: 100%; height: auto; overflow: visible; }
+.fig .b { fill: var(--fig-fill); stroke: var(--fig-line); stroke-width: 1.5; stroke-linejoin: round; }
+.fig .s { fill: var(--fig-shade); stroke: var(--fig-line); stroke-width: 1; stroke-linejoin: round; }
+.fig .glass { fill: var(--fig-fill); fill-opacity: .55; stroke: var(--fig-line); stroke-width: 1.5; }
+.fig .d { fill: none; stroke: var(--fig-line); stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+.fig .w { fill: none; stroke: var(--fig-hose); stroke-width: 5; stroke-linecap: round; stroke-linejoin: round; }
+.fig .ring { fill: none; stroke: var(--fig-line); stroke-width: 2.6; stroke-linejoin: round; }
+.fig .k { fill: var(--fig-line); }
+.fig .g { fill: none; stroke: var(--fig-shade); stroke-width: 2; stroke-linecap: round; }
+.fig .p, .fig .base { transition: opacity .2s; }
+.fig.has-hl .base, .fig.has-hl .p:not(.hl) { opacity: .42; }
+.fig .hl .b, .fig .hl .s, .fig .hl .glass { fill: var(--accent-soft); fill-opacity: 1; stroke: var(--accent); stroke-width: 2.2; }
+.fig .hl .d, .fig .hl .ring { stroke: var(--accent); }
+.fig .hl .w { stroke: var(--accent); }
+.fig .hl .k { fill: var(--accent); }
+.fig .pulse { fill: none; stroke: var(--accent); stroke-width: 2; transform-box: fill-box; transform-origin: center; animation: pulse 1.8s ease-out infinite; pointer-events: none; }
+.fig .dot { fill: var(--accent); stroke: var(--fig-bg); stroke-width: 1.5; pointer-events: none; }
+@keyframes pulse { from { transform: scale(.5); opacity: 1; } to { transform: scale(2); opacity: 0; } }
+.fig .num circle { fill: var(--ink); stroke: var(--fig-bg); stroke-width: 1.5; }
+.fig .num text { fill: var(--bg); font: 600 7.5px/1 var(--body); text-anchor: middle; }
+.fig .num.on circle { fill: var(--accent); }
+.fig .num.on text { fill: #fff; }
 
 /* ============ Troubleshooter ============ */
 .fix { background: var(--surface); border-block: 1px solid var(--line); }
@@ -151,13 +182,13 @@ svg { display: block; }
 .symptom .arrow { color: var(--muted); }
 .no-results { padding: 1.25rem; border: 1px dashed var(--line); border-radius: var(--radius-sm); color: var(--muted); }
 
-.detail { background: var(--bg); border: 1px solid var(--line); border-radius: var(--radius); padding: clamp(1.25rem, 3vw, 2rem); }
+.detail { background: var(--bg); border: 1px solid var(--line); border-radius: var(--radius); padding: clamp(1rem, 3vw, 2rem); container-type: inline-size; }
 .detail-head { display: flex; gap: 1rem; align-items: flex-start; padding-bottom: 1.25rem; border-bottom: 1px solid var(--line); margin-bottom: 1.5rem; }
 .detail-head .ico { width: 52px; height: 52px; flex: none; border-radius: 12px; background: var(--accent-soft); color: var(--accent-ink); display: grid; place-items: center; }
 .detail-head .ico svg { width: 32px; height: 32px; }
 .detail h3 { font-size: clamp(1.45rem, 2.6vw, 1.9rem); font-weight: 800; margin: .35rem 0 .7rem; }
 .badges { display: flex; flex-wrap: wrap; gap: .4rem; }
-.badge { display: inline-flex; align-items: center; gap: .35rem; padding: .25rem .65rem; border-radius: 999px; font: 500 .75rem/1.4 var(--mono); letter-spacing: .03em; background: var(--surface-2); color: var(--muted); }
+.badge { display: inline-flex; align-items: center; gap: .35rem; padding: .25rem .65rem; border-radius: 999px; font: 500 .75rem/1.4 var(--mono); letter-spacing: .03em; background: var(--surface-2); color: var(--muted); white-space: nowrap; }
 .badge.easy { background: var(--easy-soft); color: var(--easy); }
 .badge.moderate { background: var(--mod-soft); color: var(--mod); }
 .badge.pro { background: var(--danger-soft); color: var(--danger); }
@@ -167,12 +198,26 @@ svg { display: block; }
 .causes { list-style: none; counter-reset: c; margin: 0; padding: 0; display: grid; gap: .45rem; }
 .causes li { counter-increment: c; display: flex; gap: .75rem; align-items: baseline; }
 .causes li::before { content: counter(c); flex: none; width: 1.6rem; height: 1.6rem; border-radius: 50%; display: grid; place-items: center; font: 500 .78rem/1 var(--mono); background: var(--surface-2); color: var(--ink); transform: translateY(.2rem); }
-.checklist { list-style: none; margin: 0; padding: 0; display: grid; gap: .5rem; }
-.checklist label { display: flex; gap: .8rem; align-items: flex-start; padding: .8rem .9rem; border-radius: var(--radius-sm); background: var(--surface); border: 1px solid var(--line); cursor: pointer; transition: opacity .15s; }
-.checklist input { flex: none; width: 1.15rem; height: 1.15rem; margin: .2rem 0 0; accent-color: var(--accent); }
-.checklist b { font-weight: 600; }
-.checklist span { display: block; color: var(--muted); font-size: .93rem; margin-top: .1rem; }
-.checklist input:checked ~ div { opacity: .5; text-decoration: line-through; text-decoration-color: var(--muted); }
+
+.steps { list-style: none; counter-reset: s; margin: 0; padding: 0; display: grid; gap: .65rem; }
+.step { counter-increment: s; display: grid; gap: .8rem; padding: .9rem; border-radius: var(--radius-sm); background: var(--surface); border: 1px solid var(--line); align-items: start; }
+.check { display: flex; gap: .8rem; align-items: flex-start; cursor: pointer; }
+.check input { flex: none; width: 1.15rem; height: 1.15rem; margin: .2rem 0 0; accent-color: var(--accent); }
+.check b { font-weight: 600; }
+.check b::before { content: "Step " counter(s); font: 500 .72rem/1 var(--mono); letter-spacing: .04em; text-transform: uppercase; color: var(--accent-ink); display: block; margin-bottom: .35rem; }
+.check span { display: block; color: var(--muted); font-size: .93rem; margin-top: .15rem; }
+.check input:checked ~ div { opacity: .5; }
+.check input:checked ~ div b { text-decoration: line-through; text-decoration-color: var(--muted); }
+.fig-btn { display: block; width: 100%; padding: .6rem .6rem .7rem; border: 1px solid var(--line); border-radius: 8px; background: var(--fig-bg); cursor: zoom-in; text-align: left; transition: border-color .15s; }
+.fig-btn:hover { border-color: var(--accent); }
+.fig-btn .fig { max-width: 300px; margin: 0 auto; }
+.fig-cap { display: flex; gap: .4rem; font-size: .82rem; line-height: 1.4; color: var(--muted); margin-top: .5rem; }
+.fig-cap b { color: var(--ink); font-weight: 600; }
+.fig-cap svg { flex: none; width: 14px; height: 14px; color: var(--accent); margin-top: .1rem; }
+@container (min-width: 560px) {
+  .step { grid-template-columns: minmax(0, 1fr) 210px; }
+}
+
 .pro-box { background: var(--danger-soft); border-radius: var(--radius-sm); padding: 1rem 1.1rem; }
 .pro-box h4 { color: var(--danger); margin-bottom: .5rem; }
 .pro-box ul { margin: 0; padding-left: 1.1rem; display: grid; gap: .25rem; }
@@ -180,6 +225,34 @@ svg { display: block; }
 .detail-foot { margin-top: 1.5rem; padding-top: 1.1rem; border-top: 1px solid var(--line); font-size: .9rem; color: var(--muted); display: flex; flex-wrap: wrap; gap: .5rem 1rem; justify-content: space-between; }
 .detail-foot a { color: var(--accent-ink); font-weight: 600; }
 .copy-link { background: none; border: 0; padding: 0; cursor: pointer; color: var(--accent-ink); font-weight: 600; font-size: .9rem; }
+
+/* ============ Parts map ============ */
+.map-tabs { margin-bottom: 1.25rem; }
+.map-grid { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr)); }
+.map-card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 1.1rem; display: flex; flex-direction: column; gap: .9rem; }
+.map-card header { display: flex; justify-content: space-between; align-items: baseline; gap: .5rem; }
+.map-card h3 { font-size: 1.15rem; font-weight: 700; }
+.map-fig { background: var(--fig-bg); border-radius: 10px; padding: .75rem; }
+.map-fig .fig { max-width: 380px; margin: 0 auto; }
+.map-fig .p, .map-fig .num { cursor: pointer; }
+.map-fig .p:hover .b, .map-fig .p:hover .s { stroke: var(--accent); }
+.map-cap { min-height: 2.8em; font-size: .9rem; color: var(--muted); }
+.map-cap b { color: var(--ink); }
+.legend { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: .35rem; }
+.legend button { display: inline-flex; align-items: center; gap: .4rem; padding: .3rem .65rem .3rem .3rem; border-radius: 999px; border: 1px solid var(--line); background: var(--bg); cursor: pointer; font-size: .85rem; }
+.legend button:hover { border-color: var(--ink); }
+.legend button[aria-pressed="true"] { border-color: var(--accent); background: var(--accent-soft); }
+.legend .n { width: 1.35rem; height: 1.35rem; border-radius: 50%; display: grid; place-items: center; background: var(--ink); color: var(--bg); font: 600 .72rem/1 var(--body); }
+.legend button[aria-pressed="true"] .n { background: var(--accent); color: #fff; }
+
+/* ============ Zoom dialog ============ */
+.zoom { border: 0; padding: 1.25rem; border-radius: 18px; width: min(680px, calc(100% - 2rem)); max-height: calc(100% - 2rem); background: var(--surface); color: var(--ink); box-shadow: 0 20px 60px rgba(0,0,0,.35); }
+.zoom::backdrop { background: rgba(10, 11, 14, .6); }
+.zoom-fig { background: var(--fig-bg); border-radius: 12px; padding: 1rem; }
+.zoom-cap { margin: 1rem 0 1.1rem; }
+.zoom-cap b { display: block; font: 700 1.15rem/1.3 var(--display); }
+.zoom-cap span { color: var(--muted); }
+.zoom form { display: flex; justify-content: flex-end; }
 
 /* ============ Safety ============ */
 .safety { background: var(--band); color: var(--band-ink); }
@@ -242,7 +315,7 @@ svg { display: block; }
 }
 @media (min-width: 900px) {
   .hero-grid { grid-template-columns: 1.15fr .85fr; }
-  .fix-grid { grid-template-columns: 340px 1fr; }
+  .fix-grid { grid-template-columns: 320px 1fr; }
   .symptoms { position: sticky; top: 84px; }
   .safety-grid { grid-template-columns: 1.15fr .85fr; align-items: start; }
   .tool-grid { grid-template-columns: repeat(3, 1fr); }
@@ -253,7 +326,8 @@ svg { display: block; }
   .maint-grid { grid-template-columns: repeat(4, 1fr); }
 }
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after { transition: none !important; scroll-behavior: auto !important; }
+  *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+  .fig .pulse { opacity: .6; transform: scale(1.3); }
 }
 </style>
 </head>
@@ -269,6 +343,7 @@ svg { display: block; }
     <nav aria-label="Main">
       <ul class="nav" id="nav">
         <li><a href="#fix">Troubleshooter</a></li>
+        <li><a href="#parts">Parts map</a></li>
         <li><a href="#safety">Safety</a></li>
         <li><a href="#maintenance">Maintenance</a></li>
         <li><a href="#tools">Toolkit</a></li>
@@ -292,15 +367,15 @@ svg { display: block; }
       <div>
         <p class="eyebrow">DIY appliance repair · safety first</p>
         <h1>Fix it yourself.<br><span>Know when not to.</span></h1>
-        <p class="lead">Most appliance "breakdowns" come down to a clogged filter, a kinked hose, a worn seal or a wrong setting. Find the cause in minutes, fix it safely — and spot the jobs that need a professional.</p>
+        <p class="lead">Most appliance "breakdowns" come down to a clogged filter, a kinked hose, a worn seal or a wrong setting. Every step here comes with a diagram that shows exactly which part we mean — and where to find it.</p>
         <div class="hero-cta">
           <a href="#fix" class="btn accent">Start troubleshooting →</a>
-          <a href="#safety" class="btn line">Safety rules</a>
+          <a href="#parts" class="btn line">Find a part</a>
         </div>
         <div class="stats">
           <div class="stat"><b id="stat-appliances">5</b><span>appliances covered</span></div>
           <div class="stat"><b id="stat-problems">—</b><span>common problems solved</span></div>
-          <div class="stat"><b>€0</b><span>to try the easy fixes</span></div>
+          <div class="stat"><b id="stat-figs">—</b><span>illustrated steps</span></div>
         </div>
       </div>
 
@@ -318,7 +393,7 @@ svg { display: block; }
       <div class="section-head">
         <p class="eyebrow">Troubleshooter</p>
         <h2>Pick your appliance, then the symptom.</h2>
-        <p>Causes are listed from most to least likely. Work through the checklist in order and stop at anything marked for a professional.</p>
+        <p>Causes are listed from most to least likely. Each step shows the part highlighted in orange — tap a diagram to enlarge it.</p>
       </div>
 
       <div class="toolbar">
@@ -334,6 +409,19 @@ svg { display: block; }
         <ul class="symptoms" id="symptoms" aria-label="Symptoms"></ul>
         <article class="detail" id="detail" aria-live="polite"></article>
       </div>
+    </div>
+  </section>
+
+  <!-- ============ Parts map ============ -->
+  <section class="section" id="parts">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">Parts map</p>
+        <h2>Where is it? What does it look like?</h2>
+        <p>Not sure what a "drain pump filter" or a "defrost drain" is? Pick your appliance and tap any part to see exactly where it sits.</p>
+      </div>
+      <div class="tabs map-tabs" id="map-tabs" role="group" aria-label="Appliance"></div>
+      <div class="map-grid" id="map"></div>
     </div>
   </section>
 
@@ -413,6 +501,10 @@ svg { display: block; }
           <p>Yes, for the kind of fixes in this guide: cleaning filters, clearing hoses, checking seals and settings — with the appliance unplugged. Anything involving internal wiring, refrigerant, gas or the inside of a microwave is not a DIY job.</p>
         </details>
         <details>
+          <summary>The part on my appliance looks different from the diagram.</summary>
+          <p>Our diagrams show the most common layout. Positions vary by brand — a drain filter might be bottom left instead of bottom right, for example. Your manual has a labelled drawing of your exact model.</p>
+        </details>
+        <details>
           <summary>Where do I find my model number?</summary>
           <p>On washers and dishwashers it's usually on a label around the door opening or door edge. Fridges have it on an inside side wall, dryers inside the door opening, and microwaves on the back or inside the door frame.</p>
         </details>
@@ -440,10 +532,11 @@ svg { display: block; }
         <span class="logo-mark"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></span>
         Fixwell
       </a>
-      <p>These guides give general advice only. Always follow your manufacturer's manual, and call a qualified technician whenever you're unsure.</p>
+      <p>These guides give general advice only. Diagrams show a typical layout — always follow your manufacturer's manual, and call a qualified technician whenever you're unsure.</p>
     </div>
     <nav aria-label="Footer">
       <a href="#fix">Troubleshooter</a>
+      <a href="#parts">Parts map</a>
       <a href="#safety">Safety</a>
       <a href="#maintenance">Maintenance</a>
       <a href="#tools">Toolkit</a>
@@ -453,11 +546,17 @@ svg { display: block; }
   </div>
 </footer>
 
+<dialog class="zoom" id="zoom" aria-labelledby="zoom-title">
+  <div class="zoom-fig" id="zoom-fig"></div>
+  <p class="zoom-cap"><b id="zoom-title"></b><span id="zoom-text"></span></p>
+  <form method="dialog"><button class="btn" type="submit">Close</button></form>
+</dialog>
+
 <script>
 (function () {
   "use strict";
 
-  /* ============ Icons ============ */
+  /* ============ Appliance icons ============ */
   var ICON = {
     washer: '<rect x="8" y="5" width="32" height="38" rx="4"/><path d="M8 14h32"/><circle cx="24" cy="29" r="9"/><circle cx="14" cy="9.5" r="1.3"/><path d="M28 9.5h7"/>',
     fridge: '<rect x="11" y="4" width="26" height="40" rx="4"/><path d="M11 18h26"/><path d="M16 9v4M16 23v7"/>',
@@ -468,57 +567,322 @@ svg { display: block; }
   function icon(key) {
     return '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + ICON[key] + '</svg>';
   }
+  var PIN = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>';
 
-  /* ============ Repair data ============ */
+  /* ============ Diagrams ============
+     Each view is a simple line drawing (viewBox 200×152).
+     Parts are drawn in order; "only" parts appear just when highlighted.
+     Labels use "Name — where / what to do". */
+  var FLOOR = '<path class="g" d="M6 147H194"/>';
+  var VIEWS = {
+    "socket": { title: "Wall socket", base:
+      '<rect class="b" x="30" y="40" width="64" height="64" rx="10"/><circle class="s" cx="62" cy="72" r="18"/><circle class="k" cx="55" cy="72" r="2.6"/><circle class="k" cx="69" cy="72" r="2.6"/>',
+      parts: [
+        { id: "plug", label: "Plug — pull it straight out of the wall socket", at: [132, 72],
+          svg: '<path class="d" d="M118 66h-12M118 78h-12"/><rect class="b" x="118" y="58" width="28" height="28" rx="6"/><path class="w" d="M146 72c18 0 22 26 46 28"/><path class="d" d="M124 46h26m-6-5 6 5-6 5"/>' }
+      ]},
+
+    "breaker": { title: "Fuse box", base:
+      '<rect class="b" x="45" y="15" width="110" height="125" rx="6"/><rect class="s" x="57" y="40" width="86" height="64" rx="3"/>' +
+      '<rect class="b" x="66" y="52" width="12" height="40" rx="2"/><rect class="k" x="68" y="55" width="8" height="12" rx="1"/>' +
+      '<rect class="b" x="84" y="52" width="12" height="40" rx="2"/><rect class="k" x="86" y="55" width="8" height="12" rx="1"/>' +
+      '<rect class="b" x="120" y="52" width="12" height="40" rx="2"/><rect class="k" x="122" y="55" width="8" height="12" rx="1"/>' +
+      '<path class="d" d="M57 118h86M57 126h50"/>',
+      parts: [
+        { id: "breaker", label: "Circuit breaker — a tripped switch sits down or in the middle; push it fully off, then on", at: [108, 72],
+          svg: '<rect class="b" x="102" y="52" width="12" height="40" rx="2"/><rect class="k" x="104" y="77" width="8" height="12" rx="1"/>' }
+      ]},
+
+    "tap": { title: "Water supply", base:
+      '<rect class="b" x="140" y="34" width="56" height="106" rx="5"/><path class="d" d="M148 46h40"/><path class="w" d="M30 0v62h36"/><path class="w" d="M88 62c26 0 24 34 52 34"/>' + FLOOR,
+      parts: [
+        { id: "valve", label: "Water tap — behind or beside the machine; lever along the pipe is open, across is closed", at: [77, 62],
+          svg: '<rect class="b" x="66" y="53" width="22" height="18" rx="4"/><path class="d" d="M77 53V40M69 40h16"/>' }
+      ]},
+
+    "level": { title: "Levelling", base:
+      '<rect class="b" x="55" y="36" width="90" height="102" rx="6"/><path class="d" d="M55 54h90"/><circle class="d" cx="100" cy="95" r="24"/>' + FLOOR,
+      parts: [
+        { id: "spirit", label: "Spirit level — place it on top, front-to-back and side-to-side", at: [100, 29],
+          svg: '<rect class="b" x="62" y="24" width="76" height="11" rx="3"/><rect class="s" x="93" y="26.5" width="14" height="6" rx="3"/><path class="d" d="M97 26v8M103 26v8"/>' },
+        { id: "feet", label: "Adjustable feet — screw in or out until level, then tighten the lock nut", at: [133, 142],
+          svg: '<rect class="b" x="60" y="138" width="14" height="9" rx="1.5"/><rect class="b" x="126" y="138" width="14" height="9" rx="1.5"/>' }
+      ]},
+
+    /* ---- Washing machine ---- */
+    "washer-front": { title: "Front", base:
+      '<rect class="b" x="50" y="12" width="100" height="128" rx="8"/><path class="d" d="M50 36h100"/>' + FLOOR,
+      parts: [
+        { id: "drawer", label: "Detergent drawer — top left; pull out and press the release tab to remove", at: [72, 24],
+          svg: '<rect class="b" x="56" y="18" width="32" height="13" rx="2"/><path class="d" d="M63 24.5h18"/>' },
+        { id: "panel", label: "Control panel & display — programme dial, buttons and lock symbols", at: [131, 24],
+          svg: '<circle class="b" cx="106" cy="24" r="7"/><path class="d" d="M106 24v-4"/><rect class="s" x="119" y="19" width="25" height="11" rx="2"/>' },
+        { id: "door", label: "Door — the round glass door on the front", at: [76, 60],
+          svg: '<circle class="b" cx="100" cy="84" r="34"/><circle class="s" cx="100" cy="84" r="23"/>' },
+        { id: "drum", label: "Drum — the stainless steel tub you see through the glass", at: [100, 84],
+          svg: '<circle class="s" cx="100" cy="84" r="18"/><path class="d" d="M100 67v8M85 93l7-4M115 93l-7-4"/>' },
+        { id: "seal", label: "Door seal (gasket) — the rubber ring around the door opening; fold it back to look inside", at: [100, 58.5],
+          svg: '<circle class="ring" cx="100" cy="84" r="25.5"/>' },
+        { id: "latch", label: "Door latch — on the opening side of the door; it should click when closed", at: [134.5, 84],
+          svg: '<rect class="b" x="131" y="77" width="7" height="14" rx="2"/>' },
+        { id: "filter", label: "Drain pump filter — behind the small flap at the bottom front corner", at: [134, 126],
+          svg: '<rect class="b" x="124" y="118" width="20" height="16" rx="2"/><path class="d" d="M129 126h10"/>' },
+        { id: "feet", label: "Adjustable feet — one under each corner", at: [62, 143],
+          svg: '<rect class="b" x="56" y="140" width="12" height="7" rx="1"/><rect class="b" x="132" y="140" width="12" height="7" rx="1"/>' }
+      ]},
+
+    "washer-back": { title: "Back", base:
+      '<rect class="b" x="40" y="12" width="110" height="128" rx="6"/><path class="d" d="M52 28h50"/><path class="d" d="M140 132c20 4 30 8 52 8"/>' +
+      '<rect class="b" x="46" y="140" width="12" height="7" rx="1"/><rect class="b" x="132" y="140" width="12" height="7" rx="1"/>' + FLOOR,
+      parts: [
+        { id: "inlet", label: "Inlet hose — screws onto the back at the top; the other end goes to the water tap", at: [134, 26],
+          svg: '<path class="w" d="M134 26h58"/><circle class="b" cx="134" cy="26" r="6"/>' },
+        { id: "drainhose", label: "Drain hose — the grey corrugated hose that hooks into the standpipe or sink", at: [40, 8],
+          svg: '<path class="w" d="M62 30c0-30-45-30-45 12"/>' },
+        { id: "standpipe", label: "Standpipe — the vertical drain pipe the hose hooks into", at: [17, 72],
+          svg: '<rect class="b" x="10" y="42" width="14" height="105" rx="2"/><path class="d" d="M10 50h14"/>' },
+        { id: "bolts", label: "Transit bolts — 3–4 large bolts on the back of a new machine; remove before first use", at: [70, 52],
+          svg: '<circle class="b" cx="70" cy="52" r="6"/><circle class="b" cx="122" cy="52" r="6"/><circle class="b" cx="96" cy="112" r="6"/><path class="d" d="M67 52h6M119 52h6M93 112h6"/>' }
+      ]},
+
+    "washer-filter": { title: "Drain filter (close-up)", base:
+      '<rect class="b" x="14" y="8" width="172" height="128" rx="6"/><path class="d" d="M50 8a50 40 0 0 0 100 0"/><rect class="s" x="98" y="66" width="56" height="48" rx="4"/>' +
+      '<rect class="b" x="24" y="136" width="16" height="11" rx="1"/><rect class="b" x="160" y="136" width="16" height="11" rx="1"/>' + FLOOR,
+      parts: [
+        { id: "flap", label: "Filter flap — press or lever it open at the bottom front of the machine", at: [126, 121],
+          svg: '<path class="b" d="M98 114h56l6 12H92z"/>' },
+        { id: "emhose", label: "Emergency drain hose — pull it out, remove its cap and let the water run into a tray", at: [108, 84],
+          svg: '<path class="w" d="M108 74v20"/><circle class="b" cx="108" cy="97" r="3.5"/>' },
+        { id: "filtercap", label: "Pump filter — unscrew anticlockwise, slowly; water will come out", at: [133, 90],
+          svg: '<circle class="b" cx="133" cy="90" r="15"/><rect class="s" x="123" y="86" width="20" height="8" rx="3"/>' },
+        { id: "tray", only: true, label: "Tray & towels — put them down before you open anything", at: [121, 143],
+          svg: '<rect class="b" x="88" y="139" width="66" height="7" rx="2"/><path class="w" d="M46 145h34"/>' }
+      ]},
+
+    /* ---- Fridge ---- */
+    "fridge-open": { title: "Inside (door open)", base:
+      '<rect class="b" x="40" y="8" width="80" height="132" rx="6"/><rect class="s" x="46" y="14" width="68" height="78" rx="3"/><path class="d" d="M46 40h68M46 62h68"/>' +
+      '<path class="b" d="M120 10l40 8v72l-40 8z"/><path class="d" d="M126 40l28 5M126 66l28 3"/>' + FLOOR,
+      parts: [
+        { id: "thermostat", label: "Temperature control — usually inside at the top, or a display on the door", at: [97, 22],
+          svg: '<rect class="b" x="86" y="18" width="22" height="9" rx="2"/><circle class="k" cx="92" cy="22.5" r="1.6"/><path class="d" d="M97 22.5h7"/>' },
+        { id: "vents", label: "Air vents — slots that blow cold air in; keep food away from them", at: [61, 25],
+          svg: '<path class="d" d="M52 20h18M52 25h18M52 30h18"/>' },
+        { id: "drainhole", label: "Defrost drain hole — small hole or channel low on the back wall", at: [80, 86],
+          svg: '<path class="d" d="M64 86h32"/><circle class="k" cx="80" cy="86" r="3"/>' },
+        { id: "seal", label: "Door seal — the magnetic rubber strip around the edge of the door", at: [157, 54],
+          svg: '<path class="ring" d="M123 14l34 7v66l-34 7z"/>' },
+        { id: "freezer", label: "Freezer compartment — the bottom section on most fridge-freezers", at: [80, 119],
+          svg: '<path class="b" d="M40 98h80v36a6 6 0 0 1-6 6H46a6 6 0 0 1-6-6z"/><path class="d" d="M112 106v16"/>' },
+        { id: "feet", label: "Front feet — raise the front slightly so the door swings shut by itself", at: [109, 143],
+          svg: '<rect class="b" x="46" y="140" width="10" height="7" rx="1"/><rect class="b" x="104" y="140" width="10" height="7" rx="1"/>' }
+      ]},
+
+    "fridge-back": { title: "Back", base:
+      '<rect class="b" x="50" y="8" width="90" height="132" rx="6"/><path class="d" d="M60 132c-20 6-30 8-50 8"/>' +
+      '<rect class="b" x="56" y="140" width="10" height="7" rx="1"/><rect class="b" x="124" y="140" width="10" height="7" rx="1"/>' + FLOOR,
+      parts: [
+        { id: "coils", label: "Condenser coils — the black grid on the back (or underneath) of the fridge", at: [95, 55],
+          svg: '<path class="d" d="M62 20h66M62 30h66M62 40h66M62 50h66M62 60h66M62 70h66M62 80h66M62 90h66M62 20v70M128 20v70M84 20v70M106 20v70"/>' },
+        { id: "driptray", label: "Drip tray — a small plastic tray on top of the compressor", at: [114, 105],
+          svg: '<rect class="b" x="98" y="102" width="32" height="6" rx="2"/>' },
+        { id: "compressor", label: "Compressor — the black dome at the bottom; a technician-only part", at: [114, 128],
+          svg: '<path class="s" d="M100 140v-16a14 14 0 0 1 28 0v16z"/>' },
+        { id: "gap", only: true, label: "Air gap — leave a few centimetres between the fridge and the wall", at: [163, 50],
+          svg: '<path class="d" d="M146 50h34M146 50l6-4M146 50l6 4M180 50l-6-4M180 50l-6 4"/><path class="d" d="M188 4V147"/>' }
+      ]},
+
+    /* ---- Dishwasher ---- */
+    "dw-open": { title: "Door open", base:
+      '<rect class="b" x="50" y="8" width="100" height="96" rx="4"/><rect class="s" x="56" y="14" width="88" height="88" rx="3"/><path class="b" d="M50 104h100l22 36H28z"/>',
+      parts: [
+        { id: "latch", label: "Door latch — at the top of the opening; the door must click shut", at: [100, 9.5],
+          svg: '<rect class="b" x="93" y="7" width="14" height="5" rx="1.5"/>' },
+        { id: "armUp", label: "Upper spray arm — under the top basket; unclip or unscrew it to clean", at: [100, 46],
+          svg: '<path class="w" d="M72 46h56"/><circle class="b" cx="100" cy="46" r="3.5"/>' },
+        { id: "armLow", label: "Lower spray arm — at the bottom; lift it straight up to remove", at: [124, 84],
+          svg: '<path class="w" d="M66 84h68"/><circle class="b" cx="100" cy="84" r="4"/>' },
+        { id: "filter", label: "Filter — in the floor of the tub; twist anticlockwise and lift out", at: [100, 96],
+          svg: '<circle class="b" cx="100" cy="96" r="6"/><path class="d" d="M96 96h8"/>' },
+        { id: "salt", label: "Salt container — screw cap in the floor of the tub, beside the filter", at: [74, 96],
+          svg: '<circle class="b" cx="74" cy="96" r="5"/><path class="d" d="M71 96h6"/>' },
+        { id: "seal", label: "Door seal — the rubber strip around the tub opening", at: [147.5, 60],
+          svg: '<rect class="ring" x="52.5" y="10.5" width="95" height="92" rx="3"/>' },
+        { id: "detergent", label: "Detergent dispenser — on the inside of the door", at: [96, 122],
+          svg: '<rect class="b" x="84" y="116" width="24" height="12" rx="2"/><path class="d" d="M88 122h16"/>' },
+        { id: "rinse", label: "Rinse aid dispenser — the round cap next to the detergent compartment", at: [124, 122],
+          svg: '<circle class="b" cx="124" cy="122" r="5.5"/><circle class="k" cx="124" cy="122" r="1.8"/>' }
+      ]},
+
+    "dw-front": { title: "Front", base:
+      '<rect class="b" x="50" y="10" width="100" height="130" rx="6"/><path class="d" d="M80 36h40"/>' + FLOOR,
+      parts: [
+        { id: "panel", label: "Control panel — on the top edge of the door (or the front); settings menu and child lock", at: [72, 18],
+          svg: '<path class="s" d="M50 26V16a6 6 0 0 1 6-6h88a6 6 0 0 1 6 6v10z"/><rect class="b" x="58" y="14" width="28" height="8" rx="2"/><circle class="k" cx="104" cy="18" r="2"/><circle class="k" cx="114" cy="18" r="2"/><circle class="k" cx="124" cy="18" r="2"/>' },
+        { id: "feet", label: "Adjustable feet — behind the kick plate at the bottom", at: [62, 143],
+          svg: '<rect class="b" x="56" y="140" width="12" height="7" rx="1"/><rect class="b" x="132" y="140" width="12" height="7" rx="1"/>' }
+      ]},
+
+    "dw-sink": { title: "Under the sink", base:
+      '<rect class="s" x="14" y="44" width="172" height="103"/><path class="d" d="M8 44h184"/><path class="b" d="M80 44v16a6 6 0 0 0 6 6h48a6 6 0 0 0 6-6V44z"/>' +
+      '<path class="d" d="M150 44V24h-22v6"/><path class="w" d="M110 66v8"/><path class="w" d="M186 126h-26"/><path class="w" d="M146 126c-14 0-18 21-36 21"/>',
+      parts: [
+        { id: "trap", label: "Sink trap (U-bend) — unscrew the nuts by hand over a bucket and clean it out", at: [120, 96],
+          svg: '<path class="w" d="M110 74v12a10 10 0 0 0 20 0v-4h56"/>' },
+        { id: "hose", label: "Dishwasher drain hose — should rise in a high loop before joining the sink waste", at: [48, 54],
+          svg: '<path class="w" d="M24 147C24 100 30 52 48 52s30 26 58 26"/>' },
+        { id: "valve", label: "Water supply tap — under the sink; turn it off before checking hoses", at: [153, 126],
+          svg: '<rect class="b" x="146" y="118" width="14" height="16" rx="3"/><path class="d" d="M153 118v-8M147 110h12"/>' }
+      ]},
+
+    /* ---- Dryer ---- */
+    "dryer-front": { title: "Front", base:
+      '<rect class="b" x="50" y="12" width="100" height="128" rx="8"/><path class="d" d="M50 36h100"/>' +
+      '<rect class="b" x="56" y="140" width="12" height="7" rx="1"/><rect class="b" x="132" y="140" width="12" height="7" rx="1"/>' + FLOOR,
+      parts: [
+        { id: "tank", label: "Water tank — pull-out drawer at the top (condenser dryers); empty after every load", at: [73, 24],
+          svg: '<rect class="b" x="56" y="18" width="34" height="13" rx="2"/><path class="d" d="M63 24.5h20"/>' },
+        { id: "panel", label: "Control panel — programme dial, child lock and delay start", at: [132, 24],
+          svg: '<circle class="b" cx="108" cy="24" r="7"/><path class="d" d="M108 24v-4"/><rect class="s" x="120" y="19" width="24" height="11" rx="2"/>' },
+        { id: "door", label: "Door & drum — check nothing is caught in the door seal", at: [77, 53],
+          svg: '<circle class="b" cx="100" cy="76" r="32"/><circle class="s" cx="100" cy="76" r="22"/>' },
+        { id: "lint", label: "Lint filter — in the door opening (or inside the door); pull straight up and wipe clean", at: [100, 103.5],
+          svg: '<rect class="b" x="86" y="100" width="28" height="7" rx="2"/><path class="d" d="M90 103.5h20"/>' },
+        { id: "condenser", label: "Condenser unit — behind the bottom front panel; unclip, pull out and rinse", at: [100, 126],
+          svg: '<rect class="b" x="58" y="116" width="84" height="20" rx="2"/><circle class="k" cx="66" cy="126" r="2"/><circle class="k" cx="134" cy="126" r="2"/>' }
+      ]},
+
+    "dryer-back": { title: "Back (vented dryers)", base:
+      '<rect class="b" x="30" y="12" width="100" height="128" rx="6"/><circle class="b" cx="108" cy="110" r="7"/><path class="d" d="M188 4V147"/>' +
+      '<rect class="b" x="36" y="140" width="12" height="7" rx="1"/><rect class="b" x="112" y="140" width="12" height="7" rx="1"/>' + FLOOR,
+      parts: [
+        { id: "vent", label: "Vent hose — keep it short and straight with no kinks or sags", at: [146, 84],
+          svg: '<path class="w" d="M108 110c40 0 34-50 74-50"/>' },
+        { id: "outlet", label: "Outside vent — the flap on the outside wall; clear fluff so it opens freely", at: [185, 60],
+          svg: '<rect class="b" x="180" y="50" width="10" height="20" rx="1"/>' }
+      ]},
+
+    /* ---- Microwave ---- */
+    "mw-open": { title: "Door open", base:
+      '<path class="g" d="M4 131H196"/><rect class="b" x="30" y="30" width="150" height="100" rx="6"/><rect class="s" x="38" y="38" width="100" height="84" rx="3"/>',
+      parts: [
+        { id: "waveguide", label: "Waveguide cover — small panel on the inside wall; wipe gently, never remove it", at: [128, 60],
+          svg: '<rect class="b" x="122" y="48" width="12" height="24" rx="1.5"/>' },
+        { id: "ring", label: "Roller ring — the wheeled ring that sits in the track under the plate", at: [114, 115],
+          svg: '<ellipse class="ring" cx="88" cy="114" rx="28" ry="4.5"/>' },
+        { id: "coupler", label: "Coupler — the three-pronged drive in the centre of the floor", at: [88, 114],
+          svg: '<path class="b" d="M83 117l5-8 5 8z"/>' },
+        { id: "plate", label: "Glass turntable plate — lift it straight out", at: [56, 103],
+          svg: '<ellipse class="glass" cx="88" cy="104" rx="42" ry="8"/>' },
+        { id: "cup", only: true, label: "Cup of water — microwave-safe, 1 minute on full power", at: [88, 90],
+          svg: '<path class="b" d="M78 80h20v14a5 5 0 0 1-5 5h-10a5 5 0 0 1-5-5z"/><path class="d" d="M98 84a5 5 0 0 1 0 10"/><path class="d" d="M84 74c-2-3 2-5 0-8M92 74c-2-3 2-5 0-8"/>' },
+        { id: "latch", label: "Door latch slots — the door hooks click in here; keep them clean", at: [143, 55],
+          svg: '<rect class="k" x="141" y="50" width="4" height="10" rx="1"/><rect class="k" x="141" y="96" width="4" height="10" rx="1"/>' },
+        { id: "panel", label: "Control panel — power level, child lock and display", at: [161, 48],
+          svg: '<rect class="b" x="148" y="38" width="26" height="84" rx="2"/><rect class="s" x="152" y="44" width="18" height="9" rx="1.5"/><circle class="d" cx="156" cy="66" r="2.5"/><circle class="d" cx="166" cy="66" r="2.5"/><circle class="d" cx="156" cy="76" r="2.5"/><circle class="d" cx="166" cy="76" r="2.5"/><circle class="b" cx="161" cy="104" r="7"/>' },
+        { id: "door", label: "Door — must close firmly and squarely; never use it if it's bent", at: [19, 82],
+          svg: '<path class="b" d="M30 32L8 44v76l22 12z"/><path class="d" d="M26 40v84"/>' }
+      ]}
+  };
+
+  var MAPS = {
+    washer: ["washer-front", "washer-back", "washer-filter"],
+    fridge: ["fridge-open", "fridge-back"],
+    dishwasher: ["dw-open", "dw-sink", "dw-front"],
+    dryer: ["dryer-front", "dryer-back"],
+    microwave: ["mw-open"]
+  };
+
+  function findPart(viewId, partId) {
+    var v = VIEWS[viewId];
+    return v ? v.parts.filter(function (p) { return p.id === partId; })[0] : null;
+  }
+  function splitLabel(label) {
+    var i = label.indexOf(" — ");
+    return i === -1 ? [label, ""] : [label.slice(0, i), label.slice(i + 3)];
+  }
+
+  // Render a diagram. opts: { hl: partId, numbers: bool }
+  function fig(viewId, opts) {
+    opts = opts || {};
+    var v = VIEWS[viewId];
+    var hl = opts.hl;
+    var hp = hl ? findPart(viewId, hl) : null;
+    var aria = v.title + " diagram" + (hp ? ", " + splitLabel(hp.label)[0] + " highlighted" : "");
+    var out = '<svg class="fig' + (hp ? " has-hl" : "") + '" viewBox="0 0 200 152" role="img" aria-label="' + esc(aria) + '">';
+    out += '<g class="base">' + v.base + '</g>';
+    v.parts.forEach(function (p) {
+      if (p.only && p.id !== hl) return;
+      out += '<g class="p' + (p.id === hl ? " hl" : "") + '" data-part="' + p.id + '">' + p.svg + '</g>';
+    });
+    if (opts.numbers) {
+      var n = 0;
+      v.parts.forEach(function (p) {
+        if (p.only) return;
+        n++;
+        if (p.id === hl) return; // the selected part shows a pulse instead, so it isn't hidden
+        out += '<g class="num" data-part="' + p.id + '"><circle cx="' + p.at[0] + '" cy="' + p.at[1] + '" r="6"/>' +
+          '<text x="' + p.at[0] + '" y="' + (p.at[1] + 2.6) + '">' + n + '</text></g>';
+      });
+    }
+    if (hp) {
+      out += '<circle class="pulse" cx="' + hp.at[0] + '" cy="' + hp.at[1] + '" r="9"/>' +
+        '<circle class="dot" cx="' + hp.at[0] + '" cy="' + hp.at[1] + '" r="3"/>';
+    }
+    return out + '</svg>';
+  }
+
+  /* ============ Repair data ============
+     Steps: [title, detail, "view:part" diagram (optional)] */
   var APPLIANCES = [
     { id: "washer", name: "Washing machine", short: "Washer", problems: [
       { id: "wont-start", title: "Won't start", level: "easy", time: "5 min",
         causes: ["Door not fully latched", "Child lock or delay start is on", "No power at the socket or a tripped breaker", "Water taps turned off"],
         steps: [
-          ["Close the door firmly", "Push until you hear the click. A sock caught in the seal is enough to stop the latch."],
-          ["Check the display", "Look for a child-lock or delay-start symbol and switch it off (your manual shows the button combination)."],
-          ["Test the power", "Plug a lamp into the same socket and check your fuse box for a tripped breaker."],
-          ["Open the water taps", "Many machines won't start a cycle if they can't detect water supply."],
-          ["Reset the machine", "Unplug for 5 minutes, plug back in and try a short programme."]
+          ["Close the door firmly", "Push until you hear the click. A sock caught in the seal is enough to stop the latch.", "washer-front:latch"],
+          ["Check the display", "Look for a child-lock (padlock) or delay-start symbol and switch it off — your manual shows the button combination.", "washer-front:panel"],
+          ["Check the breaker", "Plug a lamp into the same socket, and check your fuse box for a tripped switch.", "breaker:breaker"],
+          ["Open the water tap", "Many machines won't start a cycle if they can't detect a water supply.", "tap:valve"],
+          ["Reset the machine", "Unplug for 5 minutes, plug back in and try a short programme.", "socket:plug"]
         ],
         pro: ["The display stays completely dark with power at the socket", "The door locks but the drum never fills or turns"] },
       { id: "wont-drain", title: "Won't drain", level: "easy", time: "20 min",
         causes: ["Clogged drain pump filter", "Kinked or squashed drain hose", "Blocked standpipe or sink trap"],
         steps: [
-          ["Unplug and prepare for water", "Put towels down and a shallow tray in front of the filter flap (bottom front corner)."],
-          ["Drain the remaining water", "Use the small emergency drain hose if there is one, or loosen the filter slowly and let water run out."],
-          ["Clean the pump filter", "Unscrew it fully and remove fluff, coins, hairpins and buttons. Rinse it under the tap."],
-          ["Check the drain hose", "Pull the machine out and look for kinks. It shouldn't be pushed more than about 15 cm into the standpipe."],
-          ["Clear the sink trap", "If the hose drains into a sink, the trap or the new-installation blanking plug may be blocking it."],
-          ["Run a rinse & spin", "Check the filter cap is tight and watch for leaks."]
+          ["Unplug and prepare for water", "Put towels down and a shallow tray in front of the filter flap. A full drum can hold several litres.", "washer-filter:tray"],
+          ["Drain the remaining water", "If there's a small emergency hose, pull it out, remove its cap and drain into the tray. Otherwise loosen the filter a little at a time.", "washer-filter:emhose"],
+          ["Clean the pump filter", "Unscrew it fully and remove fluff, coins, hairpins and buttons. Rinse it under the tap.", "washer-filter:filtercap"],
+          ["Check the drain hose", "Pull the machine out and look for kinks. It shouldn't be pushed more than about 15 cm into the standpipe.", "washer-back:drainhose"],
+          ["Clear the sink trap", "If the hose drains into a sink, the trap may be blocked. On a new installation, check the blanking plug was removed.", "dw-sink:trap"],
+          ["Refit and test", "Screw the filter back in straight and tight, then run a rinse & spin and watch for leaks.", "washer-front:filter"]
         ],
         pro: ["The pump hums but water still won't drain after cleaning the filter", "The pump makes no sound at all during the drain stage"] },
       { id: "leaking", title: "Leaking water", level: "easy", time: "15 min",
-        causes: ["Debris or a tear in the door seal", "Too much detergent causing foam overflow", "Loose inlet hose connection", "Drain filter cap not tight"],
+        causes: ["Debris or a tear in the door seal", "Too much detergent causing foam overflow", "Loose inlet hose connection", "Drain filter not screwed in fully"],
         steps: [
           ["Find where the water comes from", "Dry the floor, run a rinse cycle and watch the front, the drawer and the back."],
-          ["Inspect the door seal", "Fold back the rubber gasket and remove trapped items. Look for splits or holes."],
-          ["Clean the detergent drawer", "Pull it out, rinse off build-up and use the dose printed on the detergent pack."],
-          ["Tighten the hoses", "With taps off, check both ends of the inlet hose are hand-tight and the washer inside isn't missing."],
-          ["Check the filter cap", "Make sure the drain filter is screwed in straight and fully."]
+          ["Inspect the door seal", "Fold back the rubber gasket and remove trapped items. Look for splits or holes.", "washer-front:seal"],
+          ["Clean the detergent drawer", "Pull it out, rinse off build-up and use the dose printed on the detergent pack.", "washer-front:drawer"],
+          ["Tighten the inlet hose", "With the tap off, check both ends are hand-tight and the rubber washer inside isn't missing.", "washer-back:inlet"],
+          ["Check the filter", "Make sure the drain filter is screwed in straight and all the way.", "washer-filter:filtercap"]
         ],
         pro: ["Water comes from underneath the machine (tub, pump or internal hose)", "The door seal is torn and needs replacing"] },
       { id: "shaking", title: "Shakes or bangs on spin", level: "easy", time: "15 min",
         causes: ["Unbalanced load (one heavy item or bunched sheets)", "Machine not level", "Transit bolts still fitted (new installation)", "Coins or objects in the drum"],
         steps: [
-          ["Rebalance the load", "Spread items evenly. Wash single heavy items like bath mats with a couple of towels."],
-          ["Level the machine", "Use a spirit level on top. Adjust the feet and tighten their lock nuts so it can't rock."],
-          ["Check for transit bolts", "On a newly installed machine, make sure the shipping bolts at the back were removed."],
-          ["Check the drum", "Spin the empty drum by hand and listen for anything rattling. Clean the pump filter too."]
+          ["Rebalance the load", "Spread items evenly around the drum. Wash single heavy items like bath mats with a couple of towels.", "washer-front:drum"],
+          ["Level the machine", "Use a spirit level on top. Adjust the feet and tighten their lock nuts so it can't rock.", "level:spirit"],
+          ["Check for transit bolts", "On a newly installed machine, make sure the shipping bolts on the back were removed.", "washer-back:bolts"],
+          ["Check for loose objects", "Spin the empty drum by hand and listen for rattling. Coins often end up in the pump filter.", "washer-filter:filtercap"]
         ],
         pro: ["A loud rumbling or grinding noise that gets louder at high speed (drum bearings)", "The drum feels loose or drops when you lift it"] },
       { id: "smell", title: "Smells bad", level: "easy", time: "10 min + cycle",
         causes: ["Mould on the door seal", "Detergent build-up in the drawer", "Mostly low-temperature washes", "Dirty drain filter"],
         steps: [
-          ["Wipe the door seal", "Clean inside the folds with a mild cleaner, then dry it."],
-          ["Clean the drawer and filter", "Remove and wash the detergent drawer, then clean the drain pump filter."],
-          ["Run a maintenance wash", "Empty drum, hottest programme, with a washing machine cleaner."],
-          ["Leave it open", "Keep the door and drawer ajar after every wash so it can dry out."]
+          ["Wipe the door seal", "Clean inside the folds with a mild cleaner, then dry it.", "washer-front:seal"],
+          ["Clean the drawer", "Remove and wash the detergent drawer and the housing it slides into.", "washer-front:drawer"],
+          ["Run a maintenance wash", "Empty drum, hottest programme, with a washing machine cleaner.", "washer-front:panel"],
+          ["Leave it open", "Keep the door and drawer ajar after every wash so it can dry out.", "washer-front:door"]
         ],
         pro: [] }
     ]},
@@ -526,39 +890,40 @@ svg { display: block; }
       { id: "not-cold", title: "Not cold enough", level: "easy", time: "30 min",
         causes: ["Thermostat set too warm", "Door seal not closing properly", "Air vents blocked by food", "Dusty condenser coils", "No space around the fridge for heat to escape"],
         steps: [
-          ["Check the setting", "Aim for 3–5 °C in the fridge and −18 °C in the freezer. Use a fridge thermometer to confirm."],
-          ["Test the door seal", "Close the door on a sheet of paper. If it slides out easily, clean the seal with warm soapy water or replace it."],
-          ["Unblock the vents", "Move food away from the back wall and the vents between compartments."],
-          ["Unplug and clean the coils", "Vacuum the condenser coils on the back or underneath."],
-          ["Give it room", "Leave a few centimetres behind and above, and keep it away from ovens and direct sun."],
+          ["Check the setting", "Aim for 3–5 °C in the fridge and −18 °C in the freezer. Use a fridge thermometer to confirm.", "fridge-open:thermostat"],
+          ["Test the door seal", "Close the door on a sheet of paper. If it slides out easily, clean the seal with warm soapy water or replace it.", "fridge-open:seal"],
+          ["Unblock the vents", "Move food away from the back wall and the vents.", "fridge-open:vents"],
+          ["Unplug and clean the coils", "Pull the fridge out and vacuum the condenser coils with a brush attachment.", "fridge-back:coils"],
+          ["Give it room", "Leave a few centimetres behind and above, and keep it away from ovens and direct sun.", "fridge-back:gap"],
           ["Wait 24 hours", "Then measure the temperature again."]
         ],
-        pro: ["The compressor (the black unit at the back) doesn't run, or clicks on and off", "The freezer is fine but the fridge stays warm after clearing the vents (fan or defrost fault)"] },
+        pro: ["The compressor doesn't run, or clicks on and off", "The freezer is fine but the fridge stays warm after clearing the vents (fan or defrost fault)"] },
       { id: "water", title: "Water inside or on the floor", level: "easy", time: "15 min",
         causes: ["Blocked defrost drain hole", "Fridge not tilted slightly backwards", "Worn door seal letting in moist air"],
         steps: [
-          ["Find the drain hole", "It's a small hole or channel low on the back wall of the fridge compartment."],
-          ["Flush it", "Gently push warm water through with a syringe or a cotton bud. Don't use anything sharp."],
-          ["Check the level", "The front should be slightly higher than the back so the door swings closed by itself."],
-          ["Check the door seal", "Look for gaps where moist air gets in and condenses."]
+          ["Find the drain hole", "It's a small hole or channel low on the back wall of the fridge compartment.", "fridge-open:drainhole"],
+          ["Flush it", "Gently push warm water through with a syringe or a cotton bud. Never use anything sharp."],
+          ["Check the level", "The front should be slightly higher than the back so the door swings shut by itself.", "fridge-open:feet"],
+          ["Check the door seal", "Look for gaps where moist air gets in and condenses.", "fridge-open:seal"],
+          ["Check the drip tray", "Water from the drain collects here and evaporates. Make sure it's seated properly and not cracked.", "fridge-back:driptray"]
         ],
-        pro: ["Water keeps building up after clearing the drain", "Water drips from the back of the fridge onto the floor (drip tray or pipe damage)"] },
+        pro: ["Water keeps building up after clearing the drain", "The drip tray is cracked or the drain pipe is damaged"] },
       { id: "ice", title: "Too much ice in the freezer", level: "easy", time: "2–4 hrs",
         causes: ["Door left ajar or a weak seal", "Door opened very often", "Warm food put straight in"],
         steps: [
-          ["Defrost it manually", "Unplug, move food to a cool box, put towels down and let the ice melt naturally."],
-          ["Never chip at the ice", "Sharp tools can puncture the cooling pipes, which ends the fridge's life."],
-          ["Dry and clean", "Wipe it dry, check the door seal and plug it back in."],
-          ["Close the door properly", "Make sure drawers and food don't stop it from shutting."]
+          ["Unplug it", "Move food to a cool box and put towels down around the fridge.", "socket:plug"],
+          ["Let the ice melt naturally", "Leave the door open. Never chip at the ice — sharp tools can puncture the cooling pipes.", "fridge-open:freezer"],
+          ["Dry and check the seal", "Wipe everything dry and check the door seal closes evenly all the way round.", "fridge-open:seal"],
+          ["Close the door properly", "Make sure drawers and food don't stop it shutting."]
         ],
         pro: ["A frost-free model is building up ice (defrost heater, sensor or timer fault)"] },
       { id: "noisy", title: "Noisy or runs constantly", level: "easy", time: "20 min",
         causes: ["Dusty condenser coils", "Room is very warm", "Fridge not level or touching the wall", "Thermostat set too cold"],
         steps: [
-          ["Clean the coils", "Unplug and vacuum the coils and the area around the compressor."],
-          ["Level it", "Adjust the feet so it doesn't rock, and leave a gap from the wall and cupboards."],
-          ["Check what's rattling", "Items on top, loose drip trays and bottles touching the back panel are common culprits."],
-          ["Check the setting", "A thermostat set colder than needed makes the fridge run almost non-stop."]
+          ["Clean the coils", "Unplug and vacuum the coils and the area around the compressor.", "fridge-back:coils"],
+          ["Level it", "Adjust the feet so it doesn't rock, and leave a gap from the wall and cupboards.", "fridge-open:feet"],
+          ["Check what's rattling", "Items on top, a loose drip tray and bottles touching the back panel are common culprits.", "fridge-back:driptray"],
+          ["Check the setting", "A thermostat set colder than needed makes the fridge run almost non-stop.", "fridge-open:thermostat"]
         ],
         pro: ["Loud buzzing, knocking or repeated clicking from the compressor", "A grinding or squealing fan noise"] }
     ]},
@@ -566,38 +931,38 @@ svg { display: block; }
       { id: "dirty", title: "Dishes not getting clean", level: "easy", time: "15 min",
         causes: ["Dirty filter", "Blocked spray arm holes", "Dishes blocking the spray arms", "Old or wrong amount of detergent"],
         steps: [
-          ["Clean the filter", "Twist out the filter at the bottom of the tub and rinse it under the tap with a soft brush."],
-          ["Clean the spray arms", "Pop them off, clear the holes with a toothpick and rinse them through."],
+          ["Clean the filter", "Twist out the filter in the floor of the tub and rinse it under the tap with a soft brush.", "dw-open:filter"],
+          ["Clean the lower spray arm", "Lift it off, clear the holes with a toothpick and rinse it through.", "dw-open:armLow"],
+          ["Clean the upper spray arm", "Unclip or unscrew it from under the top basket and clean it the same way.", "dw-open:armUp"],
           ["Check the loading", "Spin each arm by hand — nothing should stop it turning. Don't nest bowls together."],
-          ["Check your detergent", "Use fresh dishwasher tablets or powder and the right programme for the load."],
-          ["Run the hot tap first", "If your dishwasher fills from the cold supply, this helps the first fill heat up faster."]
+          ["Check your detergent", "Use fresh tablets or powder, and make sure the dispenser lid opens freely.", "dw-open:detergent"]
         ],
         pro: ["The water doesn't get hot (heating element or thermostat fault)"] },
       { id: "water-left", title: "Water left in the bottom", level: "easy", time: "20 min",
         causes: ["Clogged filter", "Kinked drain hose", "Blocked sink trap or waste disposer connection"],
         steps: [
-          ["Switch off the power", "Many dishwashers are hard-wired — use the breaker."],
+          ["Switch off the power", "Many dishwashers are hard-wired — switch them off at the breaker.", "breaker:breaker"],
           ["Scoop out the water", "Use a cup and towels until you can reach the filter."],
-          ["Clean the filter and sump", "Remove the filter and clear any glass, bones or labels from the area below it."],
-          ["Check the drain hose", "Look behind and under the sink for kinks or a squashed hose."],
-          ["Clear the sink connection", "Clean the sink trap. On a new waste disposer, the knockout plug must have been removed."]
+          ["Clean the filter and sump", "Remove the filter and clear any glass, bones or labels from the area below it.", "dw-open:filter"],
+          ["Check the drain hose", "Look behind the machine and under the sink for kinks or a squashed hose.", "dw-sink:hose"],
+          ["Clear the sink trap", "Clean the trap. On a new waste disposer, the knockout plug must have been removed.", "dw-sink:trap"]
         ],
         pro: ["The drain pump hums but doesn't empty the water after cleaning", "There's a burning smell or the breaker trips"] },
       { id: "leaking", title: "Leaking", level: "easy", time: "15 min",
         causes: ["Washing-up liquid used by mistake (foam)", "Dirty or damaged door seal", "Dishwasher not level"],
         steps: [
-          ["Check the detergent", "Only use dishwasher detergent. If there's foam, run a rinse cycle with the door closed."],
-          ["Clean the door seal", "Wipe it all the way around and look for cracks or gaps."],
-          ["Level the machine", "It should be level side to side so water doesn't pool against the door."],
-          ["Look underneath", "With a torch, check the hoses under the sink are tight."]
+          ["Check the detergent", "Only use dishwasher detergent. If there's foam, run a rinse cycle with the door closed.", "dw-open:detergent"],
+          ["Clean the door seal", "Wipe it all the way round and look for cracks or gaps.", "dw-open:seal"],
+          ["Level the machine", "It should be level side to side so water doesn't pool against the door.", "dw-front:feet"],
+          ["Check the connections", "With a torch, check the hoses and the water tap under the sink are tight and dry.", "dw-sink:valve"]
         ],
         pro: ["Water appears from underneath the machine", "The door seal is torn and needs replacing"] },
       { id: "cloudy", title: "White marks or cloudy glasses", level: "easy", time: "5 min",
         causes: ["Out of dishwasher salt", "Out of rinse aid", "Water hardness set incorrectly"],
         steps: [
-          ["Refill the salt", "Fill the salt container under the bottom basket with dishwasher salt — never table salt."],
-          ["Refill the rinse aid", "Top up the rinse aid dispenser on the door."],
-          ["Set the water hardness", "Check your local water hardness and set it in the dishwasher menu (see your manual)."],
+          ["Refill the salt", "Unscrew the cap in the floor of the tub and fill with dishwasher salt — never table salt.", "dw-open:salt"],
+          ["Refill the rinse aid", "Open the round cap on the inside of the door and top it up.", "dw-open:rinse"],
+          ["Set the water hardness", "Check your local water hardness and set it in the dishwasher menu (see your manual).", "dw-front:panel"],
           ["Run a cleaning cycle", "Use a dishwasher cleaner on an empty hot cycle to remove limescale."]
         ],
         pro: [] }
@@ -606,29 +971,30 @@ svg { display: block; }
       { id: "slow", title: "Takes too long to dry", level: "easy", time: "15 min",
         causes: ["Lint filter full", "Condenser unit clogged (condenser dryers)", "Water tank full (condenser dryers)", "Kinked or blocked vent hose (vented dryers)", "Drum overloaded"],
         steps: [
-          ["Clean the lint filter", "Do this after every load — it's also an important fire-safety step."],
-          ["Empty the water tank", "On condenser dryers, empty it after every cycle."],
-          ["Clean the condenser", "Remove it (usually behind the bottom front panel) and rinse until it's clear of fluff."],
-          ["Check the vent hose", "On vented dryers, straighten the hose and clear fluff from the hose and the outside vent."],
-          ["Don't overload it", "Clothes need room to tumble. Spin them well in the washer first."]
+          ["Clean the lint filter", "Do this after every load — it's also an important fire-safety step.", "dryer-front:lint"],
+          ["Empty the water tank", "On condenser dryers, empty it after every cycle.", "dryer-front:tank"],
+          ["Clean the condenser", "Open the bottom front panel, unclip the condenser, pull it out and rinse until it's clear of fluff.", "dryer-front:condenser"],
+          ["Check the vent hose", "On vented dryers, straighten the hose and clear fluff from the hose and the outside vent.", "dryer-back:vent"],
+          ["Don't overload it", "Clothes need room to tumble. Spin them well in the washer first.", "dryer-front:door"]
         ],
         pro: ["The dryer runs but produces no heat at all"] },
       { id: "burning", title: "Burning smell", level: "moderate", time: "20 min",
         causes: ["Lint build-up near the heater", "Foreign object in the drum", "Overheating from a blocked vent"],
         steps: [
-          ["Stop the dryer immediately", "Unplug it and let it cool down completely."],
-          ["Clean every lint trap", "Filter, filter housing, condenser and the vent hose."],
-          ["Check the drum", "Look for lighters, tissues or plastic items stuck in the drum or door seal."],
+          ["Stop the dryer immediately", "Unplug it and let it cool down completely.", "socket:plug"],
+          ["Clean every lint trap", "Filter, filter housing, condenser and the vent hose.", "dryer-front:lint"],
+          ["Check the outside vent", "On vented dryers, make sure the wall flap opens freely and isn't blocked.", "dryer-back:outlet"],
+          ["Check the drum", "Look for lighters, tissues or plastic items stuck in the drum or door seal.", "dryer-front:door"],
           ["Test with a short cycle", "Stay nearby. If the smell returns, stop using it."]
         ],
         pro: ["The smell continues after cleaning — don't use the dryer until it has been checked", "You see scorch marks or smoke"] },
       { id: "wont-start", title: "Won't start", level: "easy", time: "5 min",
         causes: ["Door not closed properly", "Water tank full (condenser dryers)", "Child lock or delay start", "No power"],
         steps: [
-          ["Close the door firmly", "Check that nothing is caught in the door seal."],
-          ["Empty the water tank", "Most condenser dryers stop when the tank is full."],
-          ["Check the settings", "Turn off child lock and delay start."],
-          ["Check the power", "Test the socket and your breaker."]
+          ["Close the door firmly", "Check that nothing is caught in the door seal.", "dryer-front:door"],
+          ["Empty the water tank", "Most condenser dryers stop when the tank is full.", "dryer-front:tank"],
+          ["Check the settings", "Turn off child lock and delay start.", "dryer-front:panel"],
+          ["Check the power", "Test the socket and your fuse box.", "breaker:breaker"]
         ],
         pro: ["It still won't start with power and the door closed"] }
     ]},
@@ -636,34 +1002,34 @@ svg { display: block; }
       { id: "not-heating", title: "Runs but doesn't heat", level: "pro", time: "2 min check",
         causes: ["Wrong power level or defrost mode selected", "Magnetron, diode or capacitor fault (internal)"],
         steps: [
-          ["Check the power level", "Make sure it's not on a low power or defrost setting."],
-          ["Do the water test", "Heat a microwave-safe cup of water for 1 minute on full power. It should be clearly hot."],
+          ["Check the power level", "Make sure it's not on a low power or defrost setting.", "mw-open:panel"],
+          ["Do the water test", "Heat a microwave-safe cup of water for 1 minute on full power. It should be clearly hot.", "mw-open:cup"],
           ["Stop if it's still cold", "The fault is inside the casing. Don't open it — this is a job for a technician."]
         ],
         pro: ["Always — a microwave that runs without heating needs a technician"] },
       { id: "dead", title: "Completely dead", level: "easy", time: "5 min",
         causes: ["No power at the socket or a tripped breaker", "Plug fuse blown (UK-style plugs)", "Child lock or demo mode on"],
         steps: [
-          ["Test the socket", "Plug in something else, and check the breaker."],
-          ["Check the plug fuse", "If your plug has a fuse, replace it with one of the same rating."],
-          ["Reset it", "Unplug for a minute and plug back in."],
-          ["Check the display", "Look in the manual for how to turn off child lock or demo mode."]
+          ["Check the breaker", "Plug in something else, and check your fuse box.", "breaker:breaker"],
+          ["Reset it", "Unplug for a minute and plug back in. If your plug has a fuse, replace it with one of the same rating.", "socket:plug"],
+          ["Check the door", "Most microwaves won't do anything if the door isn't fully latched. Clean the latch slots.", "mw-open:latch"],
+          ["Check the display", "Look in the manual for how to turn off child lock or demo mode.", "mw-open:panel"]
         ],
-        pro: ["It's still dead — the internal fuse often blows because of another fault, so don't replace it yourself"] },
+        pro: ["It's still dead — the internal fuse usually blows because of another fault, so don't replace it yourself"] },
       { id: "turntable", title: "Plate not turning", level: "easy", time: "10 min",
         causes: ["Glass plate not sitting on the coupler", "Dirty or broken roller ring", "Food stuck in the track"],
         steps: [
-          ["Unplug it", "Then remove the glass plate and roller ring."],
-          ["Clean everything", "Wash the plate and ring, and wipe the track in the floor of the cavity."],
-          ["Refit it properly", "The ring sits in the track, and the plate's grooves must lock onto the coupler in the centre."]
+          ["Unplug and lift out the plate", "Take out the glass plate and wash it.", "mw-open:plate"],
+          ["Clean the roller ring", "Lift it out, wash it and wipe the track in the floor of the cavity.", "mw-open:ring"],
+          ["Refit it properly", "The ring sits in the track, and the grooves under the plate must lock onto the coupler in the centre.", "mw-open:coupler"]
         ],
         pro: ["The coupler doesn't turn at all (turntable motor)"] },
       { id: "sparking", title: "Sparks inside", level: "moderate", time: "10 min",
         causes: ["Metal inside (foil, metal trim on dishes, twist ties)", "Food splatter on the waveguide cover", "Damaged paint inside the cavity"],
         steps: [
-          ["Stop it immediately", "Open the door to stop the cycle."],
-          ["Remove any metal", "Check dishes for gold or silver trim and remove foil and twist ties."],
-          ["Clean the inside", "Wipe all walls gently, including the small panel on the side wall (the waveguide cover)."]
+          ["Stop it immediately", "Open the door to stop the cycle, then unplug it.", "mw-open:door"],
+          ["Remove any metal", "Check dishes for gold or silver trim and remove foil and twist ties.", "mw-open:plate"],
+          ["Clean the waveguide cover", "Wipe the small panel on the inside wall gently with a damp cloth. Don't remove it.", "mw-open:waveguide"]
         ],
         pro: ["It sparks with nothing metal inside", "The waveguide cover is burnt or the inside paint is chipped down to bare metal", "The door is bent or doesn't close properly"] }
     ]}
@@ -702,13 +1068,19 @@ svg { display: block; }
   function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
   function byId(id) { return APPLIANCES.filter(function (a) { return a.id === id; })[0]; }
   function pluralize(n, word) { return n + " " + word + (n === 1 ? "" : "s"); }
+  function smooth() { return matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth"; }
 
   var state = { appliance: "washer", problem: "wont-start", query: "" };
 
   /* ============ Stats ============ */
-  var total = APPLIANCES.reduce(function (sum, a) { return sum + a.problems.length; }, 0);
+  var totalProblems = 0, totalFigs = 0;
+  APPLIANCES.forEach(function (a) {
+    totalProblems += a.problems.length;
+    a.problems.forEach(function (p) { p.steps.forEach(function (s) { if (s[2]) totalFigs++; }); });
+  });
   $("#stat-appliances").textContent = APPLIANCES.length;
-  $("#stat-problems").textContent = total;
+  $("#stat-problems").textContent = totalProblems;
+  $("#stat-figs").textContent = totalFigs;
   $("#year").textContent = new Date().getFullYear();
 
   /* ============ Hero picker ============ */
@@ -720,28 +1092,31 @@ svg { display: block; }
   $("#picker").addEventListener("click", function (e) {
     var btn = e.target.closest("[data-appliance]");
     if (!btn) return;
+    clearSearch();
     select(btn.dataset.appliance);
-    $("#fix").scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
+    $("#fix").scrollIntoView({ behavior: smooth() });
   });
 
   /* ============ Tabs ============ */
-  $("#tabs").innerHTML = APPLIANCES.map(function (a) {
-    return '<button class="tab" type="button" data-appliance="' + a.id + '" aria-pressed="false">' + icon(a.id) + esc(a.short) + '</button>';
-  }).join("");
+  function tabsHtml() {
+    return APPLIANCES.map(function (a) {
+      return '<button class="tab" type="button" data-appliance="' + a.id + '" aria-pressed="false">' + icon(a.id) + esc(a.short) + '</button>';
+    }).join("");
+  }
+  $("#tabs").innerHTML = tabsHtml();
   $("#tabs").addEventListener("click", function (e) {
     var btn = e.target.closest("[data-appliance]");
     if (!btn) return;
-    $("#search").value = "";
-    state.query = "";
+    clearSearch();
     select(btn.dataset.appliance);
   });
 
   /* ============ Search ============ */
+  function clearSearch() { $("#search").value = ""; state.query = ""; }
   $("#search").addEventListener("input", function (e) {
     state.query = e.target.value.trim().toLowerCase();
     renderSymptoms();
   });
-
   function matches(appliance, problem, q) {
     var hay = [appliance.name, appliance.short, problem.title].concat(problem.causes).join(" ").toLowerCase();
     return q.split(/\s+/).every(function (word) { return hay.indexOf(word) !== -1; });
@@ -780,11 +1155,21 @@ svg { display: block; }
     if (!btn) return;
     select(btn.dataset.appliance, btn.dataset.problem);
     if (matchMedia("(max-width: 899px)").matches) {
-      $("#detail").scrollIntoView({ behavior: "smooth", block: "start" });
+      $("#detail").scrollIntoView({ behavior: smooth(), block: "start" });
     }
   });
 
   /* ============ Detail panel ============ */
+  function stepFigure(spec) {
+    var bits = spec.split(":");
+    var part = findPart(bits[0], bits[1]);
+    if (!part) return "";
+    var l = splitLabel(part.label);
+    return '<button class="fig-btn" type="button" data-fig="' + spec + '" aria-label="Enlarge diagram: ' + esc(l[0]) + '">' +
+      fig(bits[0], { hl: bits[1] }) +
+      '<span class="fig-cap">' + PIN + '<span><b>' + esc(l[0]) + '</b>' + (l[1] ? ' — ' + esc(l[1]) : '') + '</span></span></button>';
+  }
+
   function renderDetail() {
     var a = byId(state.appliance);
     var p = a.problems.filter(function (x) { return x.id === state.problem; })[0] || a.problems[0];
@@ -802,9 +1187,10 @@ svg { display: block; }
     html += '<div class="detail-block"><h4>Likely causes <small>most likely first</small></h4><ol class="causes">' +
       p.causes.map(function (c) { return '<li>' + esc(c) + '</li>'; }).join("") + '</ol></div>';
 
-    html += '<div class="detail-block"><h4>Try this <small id="progress">0 / ' + p.steps.length + ' done</small></h4><ol class="checklist">' +
+    html += '<div class="detail-block"><h4>Try this <small id="progress">0 / ' + p.steps.length + ' done</small></h4><ol class="steps">' +
       p.steps.map(function (s) {
-        return '<li><label><input type="checkbox"><div><b>' + esc(s[0]) + '</b><span>' + esc(s[1]) + '</span></div></label></li>';
+        return '<li class="step"><label class="check"><input type="checkbox"><div><b>' + esc(s[0]) + '</b><span>' + esc(s[1]) + '</span></div></label>' +
+          (s[2] ? stepFigure(s[2]) : '') + '</li>';
       }).join("") + '</ol></div>';
 
     if (p.pro.length) {
@@ -812,14 +1198,14 @@ svg { display: block; }
         p.pro.map(function (x) { return '<li>' + esc(x) + '</li>'; }).join("") + '</ul></div>';
     }
 
-    html += '<div class="detail-foot"><span>Before you start: unplug it and read the <a href="#safety">safety rules</a>.</span>' +
+    html += '<div class="detail-foot"><span>Can\'t find a part? See the <a href="#parts" data-map="' + a.id + '">' + esc(a.short.toLowerCase()) + ' parts map</a> · <a href="#safety">safety rules</a></span>' +
       '<button class="copy-link" type="button" id="copy-link">Copy link to this fix</button></div>';
 
     var detail = $("#detail");
     detail.innerHTML = html;
 
-    var boxes = detail.querySelectorAll(".checklist input");
-    detail.querySelector(".checklist").addEventListener("change", function () {
+    var boxes = detail.querySelectorAll(".check input");
+    detail.querySelector(".steps").addEventListener("change", function () {
       var done = Array.prototype.filter.call(boxes, function (b) { return b.checked; }).length;
       $("#progress").textContent = done + " / " + boxes.length + " done";
     });
@@ -835,6 +1221,27 @@ svg { display: block; }
       }
     });
   }
+
+  $("#detail").addEventListener("click", function (e) {
+    var figBtn = e.target.closest("[data-fig]");
+    if (figBtn) { openZoom(figBtn.dataset.fig); return; }
+    var mapLink = e.target.closest("[data-map]");
+    if (mapLink) showMap(mapLink.dataset.map);
+  });
+
+  /* ============ Zoom dialog ============ */
+  var zoom = $("#zoom");
+  function openZoom(spec) {
+    var bits = spec.split(":");
+    var part = findPart(bits[0], bits[1]);
+    if (!part) return;
+    var l = splitLabel(part.label);
+    $("#zoom-fig").innerHTML = fig(bits[0], { hl: bits[1] });
+    $("#zoom-title").textContent = l[0];
+    $("#zoom-text").textContent = l[1];
+    if (typeof zoom.showModal === "function") zoom.showModal();
+  }
+  zoom.addEventListener("click", function (e) { if (e.target === zoom) zoom.close(); });
 
   /* ============ State ============ */
   function select(applianceId, problemId) {
@@ -862,24 +1269,68 @@ svg { display: block; }
     }
     return false;
   }
-
   window.addEventListener("hashchange", fromHash);
 
-  // Initial render without touching the URL
-  (function init() {
-    if (fromHash()) return;
-    document.querySelector('#tabs [data-appliance="washer"]').setAttribute("aria-pressed", "true");
-    renderSymptoms();
-    renderDetail();
-  })();
+  /* ============ Parts map ============ */
+  $("#map-tabs").innerHTML = tabsHtml();
+  $("#map-tabs").addEventListener("click", function (e) {
+    var btn = e.target.closest("[data-appliance]");
+    if (btn) renderMap(btn.dataset.appliance);
+  });
+
+  function renderMap(applianceId) {
+    document.querySelectorAll("#map-tabs .tab").forEach(function (t) {
+      t.setAttribute("aria-pressed", String(t.dataset.appliance === applianceId));
+    });
+    $("#map").innerHTML = MAPS[applianceId].map(function (viewId) {
+      var v = VIEWS[viewId];
+      var parts = v.parts.filter(function (p) { return !p.only; });
+      return '<article class="map-card" data-view="' + viewId + '"><header><h3>' + esc(v.title) + '</h3>' +
+        '<span class="badge">' + pluralize(parts.length, "part") + '</span></header>' +
+        '<div class="map-fig">' + fig(viewId, { numbers: true }) + '</div>' +
+        '<p class="map-cap" aria-live="polite">Tap a number or part to see what it is and where it sits.</p>' +
+        '<ul class="legend">' + parts.map(function (p, i) {
+          return '<li><button type="button" data-part="' + p.id + '" aria-pressed="false"><span class="n">' + (i + 1) + '</span>' + esc(splitLabel(p.label)[0]) + '</button></li>';
+        }).join("") + '</ul></article>';
+    }).join("");
+  }
+
+  function selectMapPart(card, partId) {
+    var viewId = card.dataset.view;
+    var current = card.dataset.selected;
+    var next = current === partId ? "" : partId;
+    card.dataset.selected = next;
+    card.querySelector(".map-fig").innerHTML = fig(viewId, { numbers: true, hl: next || null });
+    card.querySelectorAll(".legend button").forEach(function (b) {
+      b.setAttribute("aria-pressed", String(b.dataset.part === next));
+    });
+    var cap = card.querySelector(".map-cap");
+    if (next) {
+      var l = splitLabel(findPart(viewId, next).label);
+      cap.innerHTML = '<b>' + esc(l[0]) + '</b>' + (l[1] ? ' — ' + esc(l[1]) : '');
+    } else {
+      cap.textContent = "Tap a number or part to see what it is and where it sits.";
+    }
+  }
+
+  $("#map").addEventListener("click", function (e) {
+    var target = e.target.closest("[data-part]");
+    if (!target) return;
+    selectMapPart(target.closest(".map-card"), target.dataset.part);
+  });
+
+  function showMap(applianceId) {
+    renderMap(applianceId);
+    $("#parts").scrollIntoView({ behavior: smooth() });
+  }
 
   /* ============ Maintenance ============ */
-  var short = {};
-  APPLIANCES.forEach(function (a) { short[a.id] = a.short; });
+  var shortName = {};
+  APPLIANCES.forEach(function (a) { shortName[a.id] = a.short; });
   $("#maint").innerHTML = MAINTENANCE.map(function (m) {
     return '<article class="maint"><header><h3>' + esc(m.when) + '</h3><span class="badge">' + esc(m.tag) + '</span></header><ul>' +
       m.items.map(function (it) {
-        return '<li><span class="ico" title="' + esc(short[it[0]]) + '">' + icon(it[0]) + '</span><span><span class="sr-only">' + esc(short[it[0]]) + ': </span>' + esc(it[1]) + '</span></li>';
+        return '<li><span class="ico" title="' + esc(shortName[it[0]]) + '">' + icon(it[0]) + '</span><span><span class="sr-only">' + esc(shortName[it[0]]) + ': </span>' + esc(it[1]) + '</span></li>';
       }).join("") + '</ul></article>';
   }).join("");
 
@@ -901,6 +1352,14 @@ svg { display: block; }
   nav.addEventListener("click", function (e) {
     if (e.target.closest("a")) { nav.classList.remove("open"); menuBtn.setAttribute("aria-expanded", "false"); }
   });
+
+  /* ============ Init ============ */
+  renderMap("washer");
+  if (!fromHash()) {
+    document.querySelector('#tabs [data-appliance="washer"]').setAttribute("aria-pressed", "true");
+    renderSymptoms();
+    renderDetail();
+  }
 })();
 </script>
 </body>
